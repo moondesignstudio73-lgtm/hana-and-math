@@ -1,0 +1,2 @@
+export function rectangleFromWidth(value){const n=Number(value);const width=Number.isFinite(n)?Math.min(9,Math.max(1,Math.round(n))):3;return{width,height:10-width,area:width*(10-width),perimeter:20};}
+export function formatMemo(grade,study,question){return `[상담 준비 메모]\n현재 학년: ${grade.trim()||'미기재'}\n학습 내용: ${study.trim()||'미기재'}\n궁금한 점: ${question.trim()||'미기재'}\n\n※ 개인적으로 준비한 메모이며 상담 신청이 접수된 것은 아닙니다.`;}

@@ -1,7 +1,7 @@
 {
   "name": "hana-and-math",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
-  "scripts": { "build": "node build.mjs", "check": "node verify.mjs", "start": "node serve.mjs" }
+  "scripts": { "build": "node design.mjs", "check": "node verify-design.mjs", "start": "node serve.mjs" }
 }
