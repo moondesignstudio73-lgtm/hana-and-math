@@ -1,4 +1,4 @@
-# 하나앤수학학원 홈페이지
+# 하나수학앤독서학원 홈페이지
 
 독립 프로젝트로 제작한 반응형 홈페이지 디자인 시안입니다.
 
@@ -30,7 +30,7 @@ Node.js 설치 후 `npm run build`, `npm run check`, `npm start`를 실행합니
 
 ## 참고
 
-- 사용자 제공: https://m.blog.naver.com/nowclasssw
+- 사용자 제공: https://blog.naver.com/nowclasssw
 - 디자인 참고: https://yeollimcoop.ivyro.net/review/index.html
 - 참고 저장소: https://github.com/moondesignstudio73-lgtm/yeollimcoop
 - 조사 및 제작: 2026-11-18

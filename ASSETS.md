@@ -1,6 +1,6 @@
 # 시안 사진 출처
 
-실제 하나앤수학학원 시설·강사·수강생 사진이 아닙니다. 식별되는 얼굴이 없는 학습 장면을 골랐고 화면에도 예시 사진임을 표시했습니다.
+실제 하나수학앤독서학원 시설·강사·수강생 사진이 아닙니다. 식별되는 얼굴이 없는 학습 장면을 골랐고 화면에도 예시 사진임을 표시했습니다.
 
 - `math-notebook.jpg`: Max Fischer, https://www.pexels.com/photo/a-person-writing-on-the-notebook-5212341/
 - `study-desk.jpg`: Pavel Danilyuk, https://www.pexels.com/photo/student-writing-on-a-notebook-8423073/
