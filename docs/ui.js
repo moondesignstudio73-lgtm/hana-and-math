@@ -109,4 +109,20 @@ if (memo) {
   });
 }
 
+const archiveControls = document.querySelector('.archive-controls');
+if (archiveControls) {
+  const buttons = [...archiveControls.querySelectorAll('button')];
+  const rows = [...document.querySelectorAll('.post-row')];
+  const count = document.querySelector('.archive-count');
+  archiveControls.hidden = false;
+  for (const button of buttons) {
+    button.addEventListener('click', () => {
+      const topic = button.dataset.filter;
+      for (const item of buttons) item.setAttribute('aria-pressed', String(item === button));
+      for (const row of rows) row.hidden = topic !== '전체' && row.dataset.topic !== topic;
+      count.textContent = topic + ' ' + rows.filter(row => !row.hidden).length + '편';
+    });
+  }
+}
+
 })();

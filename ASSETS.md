@@ -7,3 +7,8 @@
 - 라이선스 확인: https://www.pexels.com/license/ (2026-11-18)
 
 사진은 사이트 디자인에 사용하며, 이미지 속 인물이 학원을 추천하거나 실제 학원 수강생인 것처럼 표현하지 않습니다. 학원 실사진을 확보하면 교체할 수 있습니다.
+
+## 공식 블로그 수업 사진
+
+- clock-workshop.jpg — [시계 공부 미리 시작해야 하는 이유!](https://blog.naver.com/nowclasssw/224471515286)의 활동지와 손 부분을 잘라 사용했습니다.
+- reading-workbook.jpg, reading-classroom.jpg — [어휘 공부를 해도 글을 잘 못 읽어요.](https://blog.naver.com/nowclasssw/224450858010)의 활동지와 칠판 앞 발표 장면입니다.
