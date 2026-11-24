@@ -83,4 +83,5 @@ $$;
 revoke all on function academy_private.link_invited_guardian() from public,anon,authenticated;
 create trigger academy_invited_guardian after insert on auth.users
 for each row execute function academy_private.link_invited_guardian();
+create trigger academy_guardian_metadata after update of raw_app_meta_data on auth.users for each row when ((old.raw_app_meta_data->>'academy_invite') is distinct from (new.raw_app_meta_data->>'academy_invite')) execute function academy_private.link_invited_guardian();
 commit;
