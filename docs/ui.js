@@ -6,29 +6,31 @@ const menu = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#navigation');
 const header = document.querySelector('.header');
 
-function setMenu(open) {
-  menu.setAttribute('aria-expanded', String(open));
-  menu.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
-  nav.classList.toggle('is-open', open);
-}
-menu.hidden = false;
-menu.addEventListener('click', () => setMenu(menu.getAttribute('aria-expanded') !== 'true'));
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && nav.classList.contains('is-open')) {
-    setMenu(false);
-    menu.focus();
+if (menu && nav) {
+  function setMenu(open) {
+    menu.setAttribute('aria-expanded', String(open));
+    menu.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+    nav.classList.toggle('is-open', open);
   }
-});
-for (const event of ['click', 'focusin']) {
-  document.addEventListener(event, e => {
-    if (!header.contains(e.target)) setMenu(false);
+  menu.hidden = false;
+  menu.addEventListener('click', () => setMenu(menu.getAttribute('aria-expanded') !== 'true'));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && nav.classList.contains('is-open')) {
+      setMenu(false);
+      menu.focus();
+    }
   });
+  for (const event of ['click', 'focusin']) {
+    document.addEventListener(event, e => {
+      if (!header.contains(e.target)) setMenu(false);
+    });
+  }
+  nav.addEventListener('click', event => {
+    if (event.target.closest('a')) setMenu(false);
+  });
+  window.addEventListener('pageshow', () => setMenu(false));
+  matchMedia('(max-width: 760px)').addEventListener('change', () => setMenu(false));
 }
-nav.addEventListener('click', event => {
-  if (event.target.closest('a')) setMenu(false);
-});
-window.addEventListener('pageshow', () => setMenu(false));
-matchMedia('(max-width: 760px)').addEventListener('change', () => setMenu(false));
 
 const topButton = document.querySelector('.to-top');
 function updateTop() {
@@ -123,6 +125,34 @@ if (archiveControls) {
       count.textContent = topic + ' ' + rows.filter(row => !row.hidden).length + '편';
     });
   }
+}
+
+const clockControls = document.querySelector('[data-clock]');
+if (clockControls) {
+  const face = document.querySelector('.math-object .lesson-clock');
+  const time = document.querySelector('#clock-time');
+  let minutes = 180;
+  clockControls.hidden = false;
+  clockControls.addEventListener('click', event => {
+    const button = event.target.closest('button');
+    if (!button) return;
+    minutes = button.hasAttribute('data-reset') ? 180 : (minutes + Number(button.dataset.minutes) + 720) % 720;
+    face.style.setProperty('--minute-angle', (minutes % 60) * 6 + 'deg');
+    face.style.setProperty('--hour-angle', minutes / 2 + 'deg');
+    time.textContent = (Math.floor(minutes / 60) || 12) + '시 ' + (minutes % 60 ? minutes % 60 + '분' : '정각');
+  });
+}
+const words = document.querySelector('[data-words]');
+if (words) {
+  words.hidden = false;
+  const line = document.querySelector('#rain-word');
+  words.addEventListener('click', event => {
+    const choice = event.target.closest('button');
+    if (!choice) return;
+    line.textContent = choice.textContent;
+    for (const item of words.children) item.setAttribute('aria-pressed',String(item === choice));
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) line.animate([{opacity:.4},{opacity:1}],{duration:220});
+  });
 }
 
 })();

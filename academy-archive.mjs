@@ -16,12 +16,12 @@ const posts = [
 export const subjects = ['초등수학','독서','학원 소식'];
 const escape = text => text.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 const outside = 'target="_blank" rel="noopener noreferrer"';
-export function postList() {
-  return posts.map(([id,date,subject,title,description]) => `<article class="post-row" data-topic="${subject}"><div class="post-info"><span>${subject}</span><time datetime="${date}">${date.replaceAll('-','.')}</time></div><div><h3><a href="${blog}/${id}" ${outside}>${escape(title)}</a></h3><p>${description}</p></div><span class="post-arrow" aria-hidden="true">↗</span></article>`).join('');
+export function postList(topic) {
+  return posts.filter(post => !topic || post[2] === topic).map(([id,date,subject,title,description]) => `<article class="post-row" data-topic="${subject}"><div class="post-info"><span>${subject}</span><time datetime="${date}">${date.replaceAll('-','.')}</time></div><div><h3><a href="${blog}/${id}" ${outside}>${escape(title)}</a></h3><p>${description}</p></div><span class="post-arrow" aria-hidden="true">↗</span></article>`).join('');
 }
 export const curriculum = `<section class="wrap courses" id="curriculum"><h2>수학·독서 교육과정</h2><div class="course-grid">
-<article><img src="assets/clock-workshop.jpg" alt="시계 학습지에 시각을 표시하는 수학 활동" loading="lazy"><div><h3>초등수학</h3><p>초등 저·중학년은 각자의 속도로 진도를 나갑니다. 주 1회는 수준이 비슷한 친구들과 칠판에 풀이를 적고 생각한 과정을 설명합니다.</p><a class="text-link" href="${blog}/224377220558" ${outside}>개별 진도 수업 읽기 ↗</a></div></article>
-<article><img src="assets/reading-workbook.jpg" alt="학원 독서 수업 중 작성하는 활동지" loading="lazy"><div><h3>독서·논술</h3><p>책을 펼치기 전 낯선 어휘를 익히고, 읽으며 그 단어를 다시 만납니다. 책을 덮은 뒤에는 새로 배운 말로 짧은 글을 쓰고 발표합니다.</p><a class="text-link" href="${blog}/224450858010" ${outside}>어휘 수업 읽기 ↗</a></div></article>
+<article><img src="assets/clock-workshop.jpg" alt="시계 학습지에 시각을 표시하는 수학 활동" loading="lazy"><div><h3><a class="course-title" href="math.html">초등수학 ↗</a></h3><p>초등 저·중학년은 각자의 속도로 진도를 나갑니다. 주 1회는 수준이 비슷한 친구들과 칠판에 풀이를 적고 생각한 과정을 설명합니다.</p><a class="text-link" href="${blog}/224377220558" ${outside}>개별 진도 수업 읽기 ↗</a></div></article>
+<article><img src="assets/reading-workbook.jpg" alt="학원 독서 수업 중 작성하는 활동지" loading="lazy"><div><h3><a class="course-title" href="reading.html">독서·논술 ↗</a></h3><p>책을 펼치기 전 낯선 어휘를 익히고, 읽으며 그 단어를 다시 만납니다. 책을 덮은 뒤에는 새로 배운 말로 짧은 글을 쓰고 발표합니다.</p><a class="text-link" href="${blog}/224450858010" ${outside}>어휘 수업 읽기 ↗</a></div></article>
 </div></section>`;
 export function archiveSection() {
   return `<section class="wrap archive" id="posts"><div class="archive-head"><h2>수업 기록과 공지</h2><a href="${blog}" ${outside}>블로그 전체 글 ↗</a></div><div class="archive-controls" hidden role="group" aria-label="게시물 분류">${['전체',...subjects].map((s,i)=>`<button type="button" data-filter="${s}" aria-pressed="${i===0}">${s}</button>`).join('')}</div><p class="archive-count" role="status">전체 ${posts.length}편</p>${postList()}</section>`;
