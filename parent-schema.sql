@@ -53,4 +53,34 @@ create policy guardian_events on public.academy_events for select to authenticat
     and (academy_events.student_id is null or academy_events.student_id=g.student_id)));
 create policy guardian_lessons on public.academy_lessons for select to authenticated
   using (student_id in (select student_id from public.academy_guardians where user_id=(select auth.uid())));
+
+-- Staff deliver the code through the guardian's verified contact channel.
+create table public.academy_invitations (
+  code uuid primary key default gen_random_uuid(),
+  email text not null check (email = lower(trim(email)) and position('@' in email)>1),
+  student_id uuid not null references public.academy_students(id) on delete cascade,
+  expires_at timestamptz not null default (now() + interval '7 days')
+);
+alter table public.academy_invitations enable row level security;
+revoke all on public.academy_invitations from public, anon, authenticated;
+grant select, delete on public.academy_invitations to service_role;
+
+-- Account creation, attaching the child and consuming the invitation commit together.
+create schema if not exists academy_private;
+create function academy_private.link_invited_guardian() returns trigger
+language plpgsql security definer set search_path = '' as $$
+declare linked_student uuid;
+begin
+  if new.raw_app_meta_data->>'academy_invite' is null then return new; end if;
+  delete from public.academy_invitations
+    where code = (new.raw_app_meta_data->>'academy_invite')::uuid
+      and email = lower(new.email) and expires_at > now()
+    returning student_id into strict linked_student;
+  insert into public.academy_guardians(user_id,student_id) values(new.id,linked_student);
+  return new;
+end;
+$$;
+revoke all on function academy_private.link_invited_guardian() from public,anon,authenticated;
+create trigger academy_invited_guardian after insert on auth.users
+for each row execute function academy_private.link_invited_guardian();
 commit;

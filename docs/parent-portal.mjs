@@ -4,6 +4,8 @@ const el = id => document.getElementById(id);
 const sessionKey = 'hana-math-reading:parent-session';
 const status = el('account-status');
 const form = el('account-form');
+const enrollPanel = el('enroll-panel');
+const enrollForm = el('enroll-form');
 const signOut = el('sign-out');
 const configured = /^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(projectUrl) && Boolean(publishableKey);
 const today = new Intl.DateTimeFormat('sv-SE', {timeZone:'Asia/Seoul', year:'numeric', month:'2-digit', day:'2-digit'}).format(new Date());
@@ -78,6 +80,7 @@ function forgetSession(message) {
   session = null;
   try { sessionStorage.removeItem(sessionKey); } catch {}
   form.hidden = !configured;
+  enrollPanel.hidden = !configured;
   signOut.hidden = true;
   clearPrivate();
   status.textContent = message;
@@ -119,7 +122,7 @@ async function loadFamily() {
   }
   scheduleExpiry();
   const current = ++version;
-  form.hidden = true; signOut.hidden = false; clearPrivate();
+  form.hidden = true; enrollPanel.hidden = true; signOut.hidden = false; clearPrivate();
   status.textContent = '학부모 정보를 불러오는 중입니다.';
   try {
     const students = await rows('academy_students?select=id,display_name&order=display_name');
@@ -146,29 +149,39 @@ async function loadFamily() {
     else { clearPrivate(); status.textContent='학원 자료를 불러오지 못했습니다. 잠시 후 페이지를 새로고침해 주세요.'; }
   }
 }
-form.addEventListener('submit',async event=>{
+async function authenticate(event) {
   event.preventDefault();
-  const signup = event.submitter?.value==='signup';
-  const email = form.elements.email.value.trim();
-  const password = form.elements.password.value;
-  const controls = [...form.querySelectorAll('button')];
+  const activeForm = event.currentTarget;
+  const signup = activeForm === enrollForm;
+  const email = activeForm.elements.email.value.trim();
+  const password = activeForm.elements.password.value;
+  const controls = [...form.querySelectorAll('button'), ...enrollForm.querySelectorAll('button')];
   if (controls.some(b=>b.disabled)) return;
   controls.forEach(b=>b.disabled=true);
   status.textContent = signup ? '가입을 요청하는 중입니다.' : '로그인 중입니다.';
+  let enrolled = false;
   try {
-    const data = await api(signup ? '/auth/v1/signup' : '/auth/v1/token?grant_type=password', {method:'POST',body:JSON.stringify({email,password})},null);
-    form.elements.password.value='';
-    if (!data.access_token) {
-      status.textContent='이메일 인증 안내를 확인한 뒤 로그인해 주세요. 이미 가입했다면 기존 비밀번호로 로그인해 주세요.';
-      return;
+    if (signup) {
+      await api('/functions/v1/parent-enroll', {method:'POST',body:JSON.stringify({email,password,code:activeForm.elements.code.value.trim()})},null);
+      enrolled = true;
+      enrollForm.reset();
+      enrollPanel.open = false;
+      form.elements.email.value = email;
     }
+    const data = await api('/auth/v1/token?grant_type=password', {method:'POST',body:JSON.stringify({email,password})},null);
+    form.elements.password.value='';
     session={token:data.access_token,until:Date.now()+data.expires_in*1000};
     try {sessionStorage.setItem(sessionKey,JSON.stringify(session));} catch {}
     await loadFamily();
   } catch(error) {
-    status.textContent = error.status===429 ? '요청이 많습니다. 잠시 후 다시 시도해 주세요.' : signup ? '가입하지 못했습니다. 이메일 주소와 비밀번호를 확인해 주세요.' : '로그인하지 못했습니다. 인증 메일과 입력 정보를 확인해 주세요.';
+    if (enrolled) status.textContent = '가입이 완료되었습니다. 위의 로그인 양식으로 다시 로그인해 주세요.';
+    else if (error.status===429) status.textContent='요청이 많습니다. 잠시 후 다시 시도해 주세요.';
+    else if (signup) status.textContent='가입하지 못했습니다. 이메일과 초대 코드를 확인해 주세요. 이미 가입했다면 로그인해 주세요.';
+    else status.textContent='로그인하지 못했습니다. 이메일과 비밀번호를 확인해 주세요.';
   } finally {controls.forEach(b=>b.disabled=false);}
-});
+}
+form.addEventListener('submit',authenticate);
+enrollForm.addEventListener('submit',authenticate);
 signOut.addEventListener('click',()=>{
   const token = session?.token;
   forgetSession('로그아웃했습니다.');

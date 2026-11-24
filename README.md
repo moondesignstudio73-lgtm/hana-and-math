@@ -8,7 +8,7 @@ Node.js 설치 후 `npm run build`, `npm run check`, `npm start`를 실행합니
 
 ## 구성
 
-- 처음으로: 두 도형의 넓이를 비교하는 수학 노트 표지와 학습 가이드
+- 첫 화면에서 초등수학, 독서논술 또는 학원 홈페이지로 이동합니다.
 - 학습 노트: 직접 조작하는 둘레·넓이 도형과 풀이
 - 학원 소식: 사용자 제공 블로그 연결
 - 상담 안내: 개인용 상담 준비 메모 생성·복사 및 FAQ
@@ -26,7 +26,17 @@ Node.js 설치 후 `npm run build`, `npm run check`, `npm start`를 실행합니
 
 ## 콘텐츠 수정
 
-`design.mjs`의 문구를 수정한 후 `npm run build`로 docs를 갱신합니다. 스타일은 `design.css`, 동작은 `ui.js`, 계산·메모 로직은 `math.mjs`에서 관리합니다. 배포 전 `npm run check`를 실행합니다. 이 프로젝트는 정적 안내 사이트이며 회원·결제·개인정보 수집 기능은 없습니다. 상담 메모는 브라우저 화면에서만 만들며 전송·저장하지 않습니다.
+`design.mjs`의 문구를 수정한 후 `npm run build`로 docs를 갱신합니다. 스타일은 `design.css`, 교실 체험은 `ui.js`, 학부모 화면은 `parent-pages.mjs`와 `parent-portal.mjs`에서 관리합니다. 배포 전 `npm run check`를 실행합니다. 상담 메모는 브라우저 화면에서만 만듭니다.
+
+## 학원 담당자의 학부모 공간 운영
+
+Supabase에서 하나수학앤독서학원 프로젝트의 Table Editor를 엽니다.
+
+1. `academy_students`에 학생의 표시 이름을 입력합니다.
+2. 첫 가입은 `academy_invitations`에 확인한 보호자의 이메일(소문자)과 학생을 입력합니다. 저장할 때 생성된 일회용 `code`를 해당 보호자에게 개별 전달합니다. 기본 유효기간은 7일입니다.
+3. 보호자가 홈페이지의 학부모 공간에서 **처음 오셨나요? 회원가입**을 열고 이메일, 새 비밀번호, 코드를 입력하면 해당 학생이 연결됩니다. 기존 계정에 형제·자매를 추가할 때는 Authentication의 사용자 ID와 학생 ID를 `academy_guardians`에 연결합니다. 보호자 관계를 확인한 후 처리합니다.
+4. `academy_records`에 학생별 수업 날짜, 과목, 수업 내용, 과제를 입력합니다. `academy_lessons`에는 요일(월요일 1, 일요일 7)과 한국 현지 수업 시간을 입력합니다.
+5. `academy_notices`에 등록한 공지는 자녀가 연결된 모든 보호자가 봅니다. `academy_events`에서 학생을 비우면 공통 일정이 되고, 학생을 지정하면 해당 보호자에게만 표시됩니다.
 
 ## 참고
 
