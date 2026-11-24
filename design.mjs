@@ -9,6 +9,8 @@ for (const file of ['design.css', 'ui.js', 'math.mjs', 'parent-portal.mjs', 'par
 }
 const assetVersion = revision.digest('hex').slice(0, 10);
 const dest=new URL('./docs/',import.meta.url);
+const arrivalStyle = await readFile(new URL('./arrival.css', import.meta.url), 'utf8');
+const arrivalScript = await readFile(new URL('./arrival.js', import.meta.url), 'utf8');
 await mkdir(dest,{recursive:true});
 const blog='https://blog.naver.com/nowclasssw';
 const arr='<span class="arrow" aria-hidden="true">→</span>';
@@ -20,6 +22,9 @@ const photo=(src,alt,eager=false)=>`<img src="assets/${src}" alt="${alt}" width=
 const disclaimer='<figcaption class="photo-caption">학습 장면 예시 사진</figcaption>';
 function shell(title,current,content){
   const opening = current === "index.html";
+  if (opening) return `<!doctype html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#142744"><meta name="robots" content="noindex,nofollow"><meta name="description" content="하나수학앤독서학원의 초등수학 교실과 독서논술 교실을 만나보세요."><title>${title} | 하나수학앤독서학원</title><link rel="icon" href="favicon.svg"><link rel="stylesheet" href="design.css?v=${assetVersion}"><style>${arrivalStyle}</style></head>
+<body class="entry-page"><main id="main">${content}</main><script>${arrivalScript}</script></body></html>`;
   const portalScripts = ["parents.html","schedule.html"].includes(current) ? `<script type="module" src="parent-portal.mjs?v=${assetVersion}"></script>` : "";
   const links=nav.map(([url,t])=>`<a href="${url}"${current===url?' aria-current="page"':''}>${t}</a>`).join('');
   return `<!doctype html>

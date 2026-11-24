@@ -4,13 +4,14 @@ const arrow = '<span aria-hidden="true">↗</span>';
 const clockFace = `<span class="lesson-clock" aria-hidden="true"><i class="hour-hand"></i><i class="minute-hand"></i><b></b></span>`;
 const paperBook = '<span class="paper-book" aria-hidden="true"><i></i><i></i><b></b></span>';
 
-export const entrance = `<section class="opening" aria-labelledby="opening-title">
-<picture><source media="(max-width:650px)" srcset="assets/clock-workshop.jpg"><img class="opening-photo" src="assets/math-notebook.jpg" alt="" fetchpriority="high"></picture>
-<div class="opening-wash"></div><div class="wrap opening-copy"><h1 id="opening-title">수학을 풀고,<br><span>생각을 씁니다.</span></h1><p>나의 풀이를 설명하고, 읽은 이야기를 내 문장으로.</p></div>
-<a class="opening-scroll" href="#classrooms"><span aria-hidden="true">↓</span> 교실 선택하기</a></section>
-<section class="doorway" id="classrooms" aria-labelledby="choose-title"><div class="wrap"><div class="door-heading"><h2 id="choose-title">어느 교실로 갈까요?</h2><a class="door-home" href="home.html">홈페이지 바로가기 ${arrow}</a></div>
-<div class="door-grid"><a class="class-door math-door" href="math.html"><div class="door-art">${clockFace}</div><div class="door-copy"><h3>초등수학</h3><p>시계를 돌리고, 풀이를 설명하는 교실</p></div><span class="door-arrow" aria-hidden="true">↗</span></a>
-<a class="class-door reading-door" href="reading.html"><div class="door-art">${paperBook}</div><div class="door-copy"><h3>독서논술</h3><p>책에서 만난 말을 내 문장으로 쓰는 교실</p></div><span class="door-arrow" aria-hidden="true">↗</span></a></div></div></section>`;
+export const entrance = `<section class="arrival" aria-labelledby="arrival-title">
+<img class="arrival-photo" src="assets/reading-classroom.jpg" alt="" fetchpriority="high">
+<div class="arrival-copy"><p class="academy-name">하나수학앤독서학원</p><h1 id="arrival-title">수학을 풀고,<br>생각을 씁니다.</h1><p>나의 풀이를 설명하고,<br>읽은 이야기를 내 문장으로.</p></div>
+<a class="arrival-enter" href="#classrooms" aria-label="교실 선택 화면 열기"><span>SCROLL DOWN</span><b aria-hidden="true">↓</b></a></section>
+<section id="classrooms" class="classrooms" tabindex="-1" aria-labelledby="classroom-title">
+<div class="classrooms-intro"><h2 id="classroom-title">하나의<br> 두 교실</h2><p>아이에게 맞는 수업을 만나보세요.</p><a href="home.html">홈페이지 바로가기 <span aria-hidden="true">→</span></a></div>
+<div class="classrooms-choices"><a href="math.html"><div><h3>초등수학</h3><p>시계를 돌리고, 나의 풀이를 설명해요.</p><strong>수학 교실 들어가기 →</strong></div><span class="class-art" aria-hidden="true">${clockFace}</span></a>
+<a href="reading.html"><div><h3>독서논술</h3><p>책에서 만난 말을 내 문장으로 써요.</p><strong>독서 교실 들어가기 →</strong></div><span class="class-art" aria-hidden="true">${paperBook}</span></a></div></section>`;
 
 const classroom = (topic, title, lead, photo, alt, activity) => `<section class="room-cover"><div class="wrap room-layout"><div><a class="room-back" href="index.html#classrooms">← 교실 선택</a><h1>${title}</h1><p>${lead}</p></div><img src="assets/${photo}" alt="${alt}" fetchpriority="high"></div></section>
 <section class="wrap lesson-play">${activity}</section><section class="wrap room-posts"><div class="archive-head"><h2>${title} 수업 기록</h2><a href="journal.html#posts">전체 기록 보기 →</a></div>${postList(topic)}</section>`;

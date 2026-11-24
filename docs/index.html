@@ -1,11 +1,90 @@
 <!doctype html>
-<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#142744"><meta name="robots" content="noindex,nofollow"><title>하나의 교실 | 하나수학앤독서학원</title><meta name="description" content="하나수학앤독서학원의 초등수학·독서 교육과정, 수업 기록과 상담 안내입니다."><meta property="og:title" content="하나의 교실 | 하나수학앤독서학원"><meta property="og:type" content="website"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="design.css?v=91562bdcc5"><script src="ui.js?v=91562bdcc5" defer></script></head>
-<body class="entry-page"><a class="skip" href="#main">본문 바로가기</a><header class="header"><div class="header-inner wrap"><a class="brand" href="home.html" aria-label="하나수학앤독서학원 처음으로"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>하나수학앤독서학원</span></a><a class="entry-direct" href="home.html">홈페이지 바로가기 ↗</a></div></header>
-<main id="main" tabindex="-1"><section class="opening" aria-labelledby="opening-title">
-<picture><source media="(max-width:650px)" srcset="assets/clock-workshop.jpg"><img class="opening-photo" src="assets/math-notebook.jpg" alt="" fetchpriority="high"></picture>
-<div class="opening-wash"></div><div class="wrap opening-copy"><h1 id="opening-title">수학을 풀고,<br><span>생각을 씁니다.</span></h1><p>나의 풀이를 설명하고, 읽은 이야기를 내 문장으로.</p></div>
-<a class="opening-scroll" href="#classrooms"><span aria-hidden="true">↓</span> 교실 선택하기</a></section>
-<section class="doorway" id="classrooms" aria-labelledby="choose-title"><div class="wrap"><div class="door-heading"><h2 id="choose-title">어느 교실로 갈까요?</h2><a class="door-home" href="home.html">홈페이지 바로가기 <span aria-hidden="true">↗</span></a></div>
-<div class="door-grid"><a class="class-door math-door" href="math.html"><div class="door-art"><span class="lesson-clock" aria-hidden="true"><i class="hour-hand"></i><i class="minute-hand"></i><b></b></span></div><div class="door-copy"><h3>초등수학</h3><p>시계를 돌리고, 풀이를 설명하는 교실</p></div><span class="door-arrow" aria-hidden="true">↗</span></a>
-<a class="class-door reading-door" href="reading.html"><div class="door-art"><span class="paper-book" aria-hidden="true"><i></i><i></i><b></b></span></div><div class="door-copy"><h3>독서논술</h3><p>책에서 만난 말을 내 문장으로 쓰는 교실</p></div><span class="door-arrow" aria-hidden="true">↗</span></a></div></div></section></main>
-<footer class="footer"><div class="wrap footer-main"><a class="brand" href="home.html"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>하나수학앤독서학원</span></a><div class="footer-links"><a href="index.html#classrooms">교실 선택</a><a href="learning.html">학습 노트</a><a href="journal.html">교육과정·수업 기록</a><a href="schedule.html">일정·시간표</a><a href="parents.html">학부모 공간</a><a href="contact.html">상담 안내</a></div></div><div class="wrap footer-info"><p>서울특별시 양천구 오목로 19, 3층 301호 · 학원등록신고번호 6257</p><details class="photo-credits"><summary>사진 출처</summary><p>학원 공식 블로그 수업 사진<br><a href="https://blog.naver.com/nowclasssw/224471515286" target="_blank" rel="noopener noreferrer">시계 활동 사진</a><br><a href="https://blog.naver.com/nowclasssw/224450858010" target="_blank" rel="noopener noreferrer">독서 활동 사진</a></p></details></div></footer><button type="button" class="to-top" aria-label="맨 위로 이동" hidden>↑</button></body></html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#142744"><meta name="robots" content="noindex,nofollow"><meta name="description" content="하나수학앤독서학원의 초등수학 교실과 독서논술 교실을 만나보세요."><title>하나의 교실 | 하나수학앤독서학원</title><link rel="icon" href="favicon.svg"><link rel="stylesheet" href="design.css?v=91562bdcc5"><style>.entry-page { background:#fafbf9; color:#182c48; }
+.entry-page > .header,.entry-page > .footer { display:none; }
+.arrival { height:100vh;height:100dvh; min-height:280px; position:relative; isolation:isolate; display:grid; place-items:center; color:white; background:#142744; }
+.arrival-photo,.arrival::after { position:absolute; inset:0; width:100%; height:100%; }
+.arrival-photo { object-fit:cover; object-position:50% 43%; z-index:-2; }
+.arrival::after { content:""; z-index:-1; background:linear-gradient(0deg,#101d30b8,#101d3080),linear-gradient(90deg,#16253661,transparent); }
+.arrival-copy { text-align:center; padding-inline:20px; margin-bottom:5vh; }
+.arrival-copy h1 { color:white; font-size:clamp(36px,4.4vw,69px); letter-spacing:-.065em; line-height:1.32; font-weight:650; }
+.arrival-copy p { color:#f7f6ed; font-size:clamp(14px,1.1vw,17px); line-height:1.75; margin-top:22px; }
+.arrival-copy .academy-name { color:#ffe385; font-size:14px; font-weight:650; margin:0 0 22px; }
+.arrival-enter { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; padding-bottom:max(24px,env(safe-area-inset-bottom)); gap:3px; color:white; }
+.arrival-enter span { font-size:10px; letter-spacing:.16em; }
+.arrival-enter b { font-size:28px; font-weight:400; }
+.arrival-enter:focus-visible { outline-offset:-8px; }
+.classrooms { width:min(1160px,calc(100% - 80px)); margin:auto; min-height:100svh; display:grid; align-content:center; grid-template-columns:.75fr 1.25fr; align-items:center; gap:clamp(24px,6vw,88px); padding-block:40px; outline:none; }
+.classrooms-intro h2 {font-size:clamp(39px,5vw,74px); line-height:1.18; letter-spacing:-.065em;}
+.classrooms-intro p,.classrooms-choices p { margin-top:14px; color:#506074; }
+.classrooms-intro a { display:inline-flex; align-items:center; gap:18px; min-height:44px; margin-top:24px; font-weight:650; }
+.classrooms-choices { display:grid; gap:18px; }
+.classrooms-choices>a { min-height:clamp(172px,28vh,250px); display:flex; align-items:center; justify-content:space-between; gap:16px; padding:clamp(20px,3vw,42px); border:1px solid #d6dce1; border-left:4px solid #294967; background:#fff; }
+.classrooms-choices>a:nth-child(2) { border-left-color:#d8ad36; background:#fffdf5; }
+.classrooms-choices h3 { font-size:clamp(26px,3vw,42px); line-height:1.25; }
+.classrooms-choices strong { display:block; margin-top:20px; font-size:13px; }
+.class-art { display:grid; place-items:center; flex:none; width:clamp(56px,8vw,100px); }
+.class-art .lesson-clock,.class-art .paper-book { width:100%; }
+.entry-enabled .arrival { position:fixed; z-index:5; inset:0; transition:transform 1050ms cubic-bezier(.76,0,.24,1); touch-action:pan-x pinch-zoom; }
+html.entry-enabled:not(.choices-open),html.entry-enabled:not(.choices-open) body { overflow:hidden; }
+.choices-open .arrival { transform:translateY(-104%); pointer-events:none; }
+@media (hover:hover) { .classrooms-choices>a:hover { transform:scale(1.018); background:#f2f5f8; } .classrooms-choices>a:nth-child(2):hover { background:#fff4d1; } }
+@media (max-width:650px) { .classrooms { grid-template-columns:1fr; width:calc(100% - 40px); gap:24px; } .classrooms-intro h2 br { display:none; } .classrooms-intro a { margin-top:7px; } .classrooms-choices>a { min-height:148px; } .classrooms-choices p { font-size:14px; } }
+@media (max-height:480px) { .arrival-copy h1 { font-size:31px; } .arrival-copy .academy-name,.arrival-copy p { margin-block:5px; } .arrival-enter { padding-bottom:6px; } }
+@media(prefers-reduced-motion:reduce) { .entry-enabled .arrival { transition:none; } .classrooms-choices>a:hover { transform:none; } }
+</style></head>
+<body class="entry-page"><main id="main"><section class="arrival" aria-labelledby="arrival-title">
+<img class="arrival-photo" src="assets/reading-classroom.jpg" alt="" fetchpriority="high">
+<div class="arrival-copy"><p class="academy-name">하나수학앤독서학원</p><h1 id="arrival-title">수학을 풀고,<br>생각을 씁니다.</h1><p>나의 풀이를 설명하고,<br>읽은 이야기를 내 문장으로.</p></div>
+<a class="arrival-enter" href="#classrooms" aria-label="교실 선택 화면 열기"><span>SCROLL DOWN</span><b aria-hidden="true">↓</b></a></section>
+<section id="classrooms" class="classrooms" tabindex="-1" aria-labelledby="classroom-title">
+<div class="classrooms-intro"><h2 id="classroom-title">하나의<br> 두 교실</h2><p>아이에게 맞는 수업을 만나보세요.</p><a href="home.html">홈페이지 바로가기 <span aria-hidden="true">→</span></a></div>
+<div class="classrooms-choices"><a href="math.html"><div><h3>초등수학</h3><p>시계를 돌리고, 나의 풀이를 설명해요.</p><strong>수학 교실 들어가기 →</strong></div><span class="class-art" aria-hidden="true"><span class="lesson-clock" aria-hidden="true"><i class="hour-hand"></i><i class="minute-hand"></i><b></b></span></span></a>
+<a href="reading.html"><div><h3>독서논술</h3><p>책에서 만난 말을 내 문장으로 써요.</p><strong>독서 교실 들어가기 →</strong></div><span class="class-art" aria-hidden="true"><span class="paper-book" aria-hidden="true"><i></i><i></i><b></b></span></span></a></div></section></main><script>const scene = document.querySelector('.arrival');
+const choices = document.getElementById('classrooms');
+const root = document.documentElement;
+root.classList.add('entry-enabled');
+function syncStage() {
+  const open = location.hash === '#classrooms';
+  root.classList.toggle('choices-open',open);
+  scene.inert = open;
+  choices.inert = !open;
+  if (open) choices.focus({preventScroll:true});
+  else window.scrollTo(0,0);
+}
+function openChoices() {
+  if (!scene.inert) location.hash = 'classrooms';
+}
+syncStage();
+window.addEventListener('hashchange',syncStage);
+window.addEventListener('pageshow',syncStage);
+let distance = 0;
+let lastWheel = 0;
+let quietUntil = 0;
+window.addEventListener('wheel', event => {
+  if (event.ctrlKey || Math.abs(event.deltaX)>Math.abs(event.deltaY)) return;
+  const now = performance.now();
+  if (scene.inert) {
+    if (now < quietUntil) { event.preventDefault(); quietUntil = now + 160; }
+    return;
+  }
+  event.preventDefault();
+  if (now - lastWheel > 220 || event.deltaY <= 0) distance = 0;
+  lastWheel = now;
+  distance += Math.max(0,event.deltaY) * (event.deltaMode===1 ? 16 : event.deltaMode===2 ? innerHeight : 1);
+  if (distance >= 32) { distance = 0; quietUntil = now + 180; openChoices(); }
+},{passive:false});
+let start;
+scene.addEventListener('touchstart',event => { start = event.touches.length === 1 ? event.touches[0] : null; },{passive:true});
+scene.addEventListener('touchend',event => {
+  if (!start || event.touches.length) return;
+  const end = event.changedTouches[0];
+  const dy = start.clientY - end.clientY;
+  if (dy > 42 && dy > Math.abs(start.clientX-end.clientX)) openChoices();
+  start = null;
+},{passive:true});
+scene.addEventListener('touchcancel',() => {start=null;});
+window.addEventListener('keydown',event => {
+  if (scene.inert || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+  if (['ArrowDown','PageDown',' ','End'].includes(event.key)) {event.preventDefault();openChoices();}
+});
+</script></body></html>
